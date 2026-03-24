@@ -1,6 +1,6 @@
 # Animated Toast Popover Component
 
-A distinctive, animated toast popover for web apps, designed with bold editorial style and smooth entry/exit transitions. Features include:
+A distinctive, animated toast popover for web apps with smooth entry/exit transitions. Features include:
 
 - **Manual or auto-close** (configurable)
 - **Animated open/close** with CSS transitions
@@ -88,10 +88,6 @@ const PROGRESS_REFRESH_MS = 50; // Progress bar update interval (ms)
 ---
 
 ## Credits
-- Design and animation inspired by modern editorial UI trends.
 - Animation techniques based on [LogRocket's CSS popover animation guide](https://blog.logrocket.com/animating-dialog-popover-css-starting-style/).
 
 ---
-
-## License
-See LICENSE.txt for details.
