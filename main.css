@@ -14,7 +14,7 @@ body {
   font-family: 'Bebas Neue', Impact, 'Arial Narrow Bold', sans-serif;
   color: #fff;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 }
 
@@ -54,7 +54,6 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
   min-width: 340px;
   max-width: 90vw;
   background: rgba(30, 30, 40, 0.98);
@@ -63,11 +62,18 @@ body {
   border: 2px solid #fff3;
   z-index: 1000;
   opacity: 1;
-  transition: opacity 0.25s cubic-bezier(.4,2,.6,1), transform 0.25s cubic-bezier(.4,2,.6,1);
-  animation: popover-in 0.4s cubic-bezier(.4,2,.6,1);
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 0.4s cubic-bezier(.4,2,.6,1), transform 0.4s cubic-bezier(.4,2,.6,1);
 }
 
-@keyframes popover-in {
+#pop.popover-animating-in {
+  animation: popover-fade-in 0.4s cubic-bezier(.4,2,.6,1);
+}
+#pop.popover-animating-out {
+  animation: popover-fade-out 0.4s cubic-bezier(.4,2,.6,1);
+}
+
+@keyframes popover-fade-in {
   from {
     opacity: 0;
     transform: translate(-50%, -60%) scale(0.95);
@@ -75,6 +81,17 @@ body {
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes popover-fade-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.95);
   }
 }
 

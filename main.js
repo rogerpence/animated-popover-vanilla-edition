@@ -5,17 +5,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeBtn = document.querySelector(".close-popover-btn");
 
     function showPopover() {
-        popover.classList.remove("popover-hidden");
-        popover.classList.add("popover-visible");
+        popover.classList.remove("popover-hidden", "popover-animating-out");
+        popover.classList.add("popover-visible", "popover-animating-in");
         showBtn.setAttribute("aria-expanded", "true");
+        // Remove animating-in after animation
+        popover.addEventListener("animationend", function handler(e) {
+            if (e.animationName === "popover-fade-in") {
+                popover.classList.remove("popover-animating-in");
+                popover.removeEventListener("animationend", handler);
+            }
+        });
         closeBtn.focus();
     }
 
     function closePopover() {
-        popover.classList.remove("popover-visible");
-        popover.classList.add("popover-hidden");
+        popover.classList.remove("popover-animating-in");
+        popover.classList.add("popover-animating-out");
         showBtn.setAttribute("aria-expanded", "false");
-        showBtn.focus();
+        // Wait for animation to finish before hiding
+        popover.addEventListener("animationend", function handler(e) {
+            if (e.animationName === "popover-fade-out") {
+                popover.classList.remove(
+                    "popover-visible",
+                    "popover-animating-out",
+                );
+                popover.classList.add("popover-hidden");
+                popover.removeEventListener("animationend", handler);
+                showBtn.focus();
+            }
+        });
     }
 
     showBtn.addEventListener("click", showPopover);
