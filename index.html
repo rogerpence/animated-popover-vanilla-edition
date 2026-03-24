@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <main>
+        <h1 class="headline">Toast Popover Demo</h1>
+        <button class="show-popover-btn" popovertarget="pop" aria-controls="pop" aria-haspopup="dialog"
+            aria-expanded="false">Show Popover</button>
+
+        <div id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title" class="popover-hidden">
+            <div class="popover-content">
+                <h2 id="pop-title">Special Toast Message</h2>
+                <p>This is a bold, editorial popover. Click outside or the button below to close.</p>
+                <button class="close-popover-btn" aria-label="Close popover">×</button>
+            </div>
+        </div>
+
+        <script src="./main.js"></script>
+    </main>
+</body>
+
+</html>
