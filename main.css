@@ -1,3 +1,25 @@
+.popover-progress {
+  position: static;
+  margin-top: 1.5rem;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1.5rem 1.5rem 0 1.5rem 1.5rem;
+  overflow: hidden;
+  width: 100%;
+  z-index: 2;
+  direction: rtl;
+}
+.popover-progress-bar {
+  height: 100%;
+  background: linear-gradient(270deg, #ff3b3b 0%, #ffb347 100%);
+  width: 100%;
+  transition: width 0.1s linear;
+  float: right;
+}
+
+.popover-content {
+  position: relative;
+}
 @import "https://unpkg.com/open-props/open-props.min.css";
 @import "https://unpkg.com/open-props/normalize.min.css";
 
@@ -45,7 +67,6 @@ body {
   box-shadow: 0 4px 24px #0008;
 }
 
-
 #pop.popover-hidden {
   display: none;
 }
@@ -69,6 +90,7 @@ body {
 #pop.popover-animating-in {
   animation: popover-fade-in 0.4s cubic-bezier(.4,2,.6,1);
 }
+
 #pop.popover-animating-out {
   animation: popover-fade-out 0.4s cubic-bezier(.4,2,.6,1);
 }

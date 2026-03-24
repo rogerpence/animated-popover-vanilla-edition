@@ -1,15 +1,30 @@
 // Editorial popover logic: open, close, light dismiss, accessibility (JS-only)
 document.addEventListener("DOMContentLoaded", () => {
     const AUTO_CLOSE_SECONDS = 4; // Change this value for different auto-close durations
+    const PROGRESS_REFRESH_MS = 30; // Milliseconds between progress bar updates
     const popover = document.getElementById("pop");
     const showBtn = document.querySelector(".show-popover-btn");
     const closeBtn = document.querySelector(".close-popover-btn");
+    const progressContainer = document.getElementById("popover-progress");
+    const progressBar = document.querySelector(".popover-progress-bar");
     let autoCloseTimer = null;
+    let progressTimer = null;
+    let progressStart = null;
 
     function clearAutoCloseTimer() {
         if (autoCloseTimer) {
             clearTimeout(autoCloseTimer);
             autoCloseTimer = null;
+        }
+        if (progressTimer) {
+            clearInterval(progressTimer);
+            progressTimer = null;
+        }
+        if (progressBar) {
+            progressBar.style.width = "100%";
+        }
+        if (progressContainer) {
+            progressContainer.hidden = true;
         }
     }
 
@@ -27,9 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
         closeBtn.focus();
         clearAutoCloseTimer();
         if (AUTO_CLOSE_SECONDS > 0) {
+            if (progressContainer) progressContainer.hidden = false;
+            progressStart = Date.now();
+            progressBar.style.width = "100%";
+            progressTimer = setInterval(() => {
+                const elapsed = (Date.now() - progressStart) / 1000;
+                const percent = Math.max(0, 1 - elapsed / AUTO_CLOSE_SECONDS);
+                progressBar.style.width = percent * 100 + "%";
+            }, PROGRESS_REFRESH_MS);
             autoCloseTimer = setTimeout(() => {
                 closePopover();
             }, AUTO_CLOSE_SECONDS * 1000);
+        } else {
+            if (progressContainer) progressContainer.hidden = true;
         }
     }
 
@@ -48,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 popover.classList.add("popover-hidden");
                 popover.removeEventListener("animationend", handler);
                 showBtn.focus();
+                if (progressContainer) progressContainer.hidden = true;
             }
         });
     }
